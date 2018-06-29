@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lss.mybatis.dao.EmployeeMapper">
+    <!--名称空间
+    id:唯一标识
+    resultType:返回值类型
+    -->
+    <!--<select id="getEmpById" resultType="com.lss.mybatis.bean.Employee">
+        select id,last_name lastName,email,gender from tb1_employee where id = #{id}
+    </select>-->
+
+
+    <select id="getEmpsByLastNameLike" resultType="Employee">
+        select * from tb1_employee where last_name like #{lastName}
+    </select>
+
+
+
+    <select id="getEmpById" resultType="com.lss.mybatis.bean.Employee">
+        select * from tb1_employee where id = #{id}
+    </select>
+
+    <select id="getEmpByIdAndLastName" resultType="Employee">
+        SELECT * FROM  tb1_employee WHERE id=#{id} AND last_name=#{lastName}
+    </select>
+
+    <select id="getEmpByMap" resultType="Employee">
+        SELECT * FROM  tb1_employee WHERE id=#{id} AND last_name=#{lastName}
+    </select>
+
+    <!--添加操作-->
+    <insert id="addEmp" parameterType="com.lss.mybatis.bean.Employee" useGeneratedKeys="true" keyProperty="id">
+        insert into tb1_employee(last_name,email,gender)values(#{lastName},#{email},#{gender})
+    </insert>
+
+    <update id="updateEmp">
+        UPDATE tb1_employee set last_name=#{lastName},email=#{email},gender=#{gender} where id=#{id}
+    </update>
+
+    <delete id="deleteEmpById">
+        delete from tb1_employee where id=#{id}
+    </delete>
+</mapper>
